@@ -1,0 +1,62 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="r_cart_wrapper" style="position:absolute;left:35px;background-color: #e6e6e6;width: 235px;height: 100%;">
+	<div class="r_cart_info" style="color:gray">
+		<div class="select_all" style="display:none;">
+			<input id="ElectCart" type="checkbox" checked="" data-tmc="elect"><label for="ElectCart">全选</label>
+		</div>
+		<div class="cart_list">
+			<!-- {if $goods} -->
+<ul>
+		{foreach from=$goods item=goods name=goods key=key}
+		<li {if $key%2 neq 0}{else}{/if}>
+			<!-- <span>
+            	<a href="{$goods.url}" >
+                	<img src="{$goods.goods_thumb}" width="50px" alt="{$goods.goods_name}">
+                </a>
+            </span>
+			<p>
+            	<a href="{$goods.url}">{$goods.short_name}</a>
+				<span>{$goods.goods_jj}</span>
+			</p>
+			<p>
+				<span><span>{$goods.goods_price}</span><span><br/>×</span><span>{$goods.goods_number}</span></span>
+                <br/><a href="javascript:" onClick="deleteCartGoods({$goods.rec_id})">[删除]</a>
+            </p> -->
+			<div class="cart_info_detail" style="width:40px;position: relative;"><a href="javascript:" onClick="deleteCartGoods({$goods.rec_id})" style="font-size: 11px;margin-top: 18px;position: absolute;margin-left: 10px;">[删除]</a></div>
+			<div class="cart_info_detail" style="width:50px;"><span>
+            	<a href="{$goods.url}" >
+                	<img src="{$goods.goods_thumb}" width="50px" alt="{$goods.goods_name}">
+                </a>
+            </span></div>
+			<div class="cart_info_detail" style="width:50px"><div style="height:50px;overflow:hidden"><a href="{$goods.url}" style="font-size:12px;color:gray;">{$goods.short_name}</a></div></div>
+			<div class="cart_info_detail" style="width:40px;text-align:center;position: relative;"><span style="margin-top: 17px;position: absolute;">{$goods.goods_number}</span></div>
+			<div class="cart_info_detail" style="width:50px;position: relative;"><span style="margin-top: 17px;position: absolute;">{$goods.goods_price}</span></div>
+		</li>
+		{/foreach}
+	</ul>
+	<span id="hidden_cart_num" style="display:none">{$number}</span>
+	<!-- {/if} -->
+		</div>
+		<div class="sub_total" style="display:none;">
+			{$number}
+		</div>
+	</div>
+	<div class="checkout_btn_wrapper" style="position:fixed;bottom:15px;text-align: center;width:235px;">
+		<div class="checkout_btn" style="width: 85%;
+    height: 40px;
+    line-height: 40px;
+    background-color: #F6BA00;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;color:#fff;margin:0 auto;"><a href="flow.php" style="color:#fff;">结 算</a></div>
+	</div>
+	
+</div>
+<script type="text/javascript" id="update_cart_num">
+	
+		var num = {$number};
+		if (num > 0){
+			var content = "<span style='width:25px;height:25px;border-radius:50%;background:#348E44;float:left;font-size: 16px;margin: 3px 0 0 5px;line-height: 24px;color: #F6BA00;'>"+num+"</span>";
+			$("#cart_quantity").html(content);
+		}
+</script>

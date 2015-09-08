@@ -1,0 +1,924 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<meta property="qc:admins" content="2431054634354631" />
+<meta property="wb:webmaster" content="40b2820b0cb256c9" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
+
+
+</head>
+
+
+<body>
+
+<!--<input type="text" id="x" style="position:fixed; top:10px; left:10px;">
+<input type="text" id="y" style="position:fixed; top:30px; left:10px;" >-->
+<!-- #BeginLibraryItem "/library/index_page_header.lbi" --><!-- #EndLibraryItem -->
+{*  *}
+{insert_scripts files='common.js,index.js,jssor.js,jssor.slider.js,marquee.js,vertical_nav.js'}
+
+<!--<nav id="cd-vertical-nav">
+		<ul>
+		<!-- {foreach name=cat_info_list from=$cat_info_list  key=key item=cat_info_list_item}-->
+			<!--<li>
+				<a id="{$cat_info_list_item.sort_order}" href="#section{$cat_info_list_item.sort_order}" data-number="{$cat_info_list_item.sort_order}">
+					<!--<span class="cd-dot"></span>-->
+					<!--<span class="cd-label"></span>-->
+					<!--<span class="navigator">
+					<div id="img_above_text_{$cat_info_list_item.sort_order}" class="img_above_text">
+					<table border="0" cellspacing="0" cellpadding="0" style="width:100%;height:100%;">
+					<tr>
+					<td style="vertical-align:middle;text-align: center;">
+					<div>
+					{$cat_info_list_item.sort_order}F
+					</div>
+					</td>
+					</tr>
+					</table>
+					</div>
+					</span>
+				</a>
+					<div id="text_under_img_{$cat_info_list_item.sort_order}" class="" style="display:none;">
+					<table border="0" cellspacing="0" cellpadding="0" style="width:100%;height:100%;">
+					<tr>
+					<td style="vertical-align:middle;text-align: center;">	
+					<div>
+					{$cat_info_list_item.cat_name}
+					</div>
+					</td>
+					</tr>
+					</table>
+					</div>
+					<div id="ori_img_above_text_{$cat_info_list_item.sort_order}" class="" style="display:none;">
+					</div>
+			</li>
+		<!-- {/foreach} -->
+		<!--</ul>
+</nav>-->
+
+<nav id="cd-vertical-nav" style="display: none;">
+<!-- {foreach name=cat_info_list from=$cat_info_list  key=key item=cat_info_list_item}-->
+<div style="width: 36px;height: 36px;" id="nav_div_{$cat_info_list_item.sort_order}">
+	<a id="{$cat_info_list_item.sort_order}" class="vertical_nav_div_a" href="#section{$cat_info_list_item.sort_order}" data-number="{$cat_info_list_item.sort_order}"
+	style="text-decoration: none;overflow: hidden;"
+	>
+	<span id="vertical-nav-span-number-{$cat_info_list_item.sort_order}" class="vertical-nav-span-number sider-floor-pic sider-floor1" 
+	style="
+	display: block;
+	font-size: 14px;
+	font-style: normal;
+	text-align: center;
+	color: #5a5a5a;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-stroke-width: .2px;	
+	"><div style="width:100%;height:100%;padding:0px;display:table;"><font style="display:table-cell;vertical-align:middle;">{$cat_info_list_item.sort_order}F</font></div></span>
+	<span id="vertical-nav-span-font-{$cat_info_list_item.sort_order}" class="vertical-nav-span-font sider-floor-double  sider-floor-font"
+	style="
+	display: none;
+	text-align: center;	
+	"><div style="width:100%;height:100%;padding:0px;display:table;"><font style="display:table-cell;vertical-align:middle;">{$cat_info_list_item.cat_name}</font></div></span>
+	</a>
+</div>
+<!-- {/foreach} -->	
+</nav>
+
+<!--===================================================== 
+======================== slide show ===================== 
+======================================================-->
+<div class="blank"></div>
+<div class="block clearfix">
+
+    <script>
+
+        jssor_main_banner_starter = function (containerId) {
+            var options = {
+                $AutoPlay: true,
+
+                $PauseOnHover: 1,                               //[Optional] Whether to pause when mouse over if a slideshow is auto playing, default value is false
+
+                $ArrowKeyNavigation: true,   			            //Allows arrow key to navigate or not
+                $SlideWidth: 602,                                   //[Optional] Width of every slide in pixels, the default is width of 'slides' container
+                //$SlideHeight: 300,                                  //[Optional] Height of every slide in pixels, the default is width of 'slides' container
+                $SlideSpacing: 2, 					                //Space between each slide in pixels
+                $DisplayPieces: 2,                                  //Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
+                $ParkingPosition: 903,                                //The offset position to park slide (this options applys only when slideshow disabled).
+
+                $ArrowNavigatorOptions: {                       //[Optional] Options to specify and enable arrow navigator or not
+                    $Class: $JssorArrowNavigator$,              //[Requried] Class to create arrow navigator instance
+                    $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+                    $AutoCenter: 2,                                 //[Optional] Auto center arrows in parent container, 0 No, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+                    $Steps: 1                                       //[Optional] Steps to go for each navigation request, default value is 1
+                }
+            };
+
+            var jssor_main_banner = new $JssorSlider$(containerId, options);
+            //responsive code begin
+            //you can remove responsive code if you don't want the slider scales while window resizes
+            function ScaleSlider() {
+                var parentWidth = jssor_main_banner.$Elmt.parentNode.clientWidth;
+                if (parentWidth)
+                    jssor_main_banner.$ScaleWidth(Math.min(parentWidth, 1200));
+                else
+                    $Jssor$.$Delay(ScaleSlider, 30);
+            }
+
+            ScaleSlider();
+            $Jssor$.$AddEvent(window, "load", ScaleSlider);
+
+            $Jssor$.$AddEvent(window, "resize", $Jssor$.$WindowResizeFilter(window, ScaleSlider));
+            $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
+            //responsive code end
+        };
+    </script>
+	<!-- scroll banner -->
+   <script>
+        slide_go = function (containerId,AutoPlay,drag) {
+           if(AutoPlay == ''){AutoPlay = false;}
+           if(drag == ''){drag = 0;}
+
+            var options = {
+                $FillMode: 2,                                       //[Optional] The way to fill image in slide, 0 stretch, 1 contain (keep aspect ratio and put all inside slide), 2 cover (keep aspect ratio and cover whole slide), 4 actual size, 5 contain for large image, actual size for small image, default value is 0
+                $AutoPlay: AutoPlay,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
+                $AutoPlayInterval: 4000,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
+                $PauseOnHover: 1,                                   //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
+
+                $ArrowKeyNavigation: true,   			            //[Optional] Allows keyboard (arrow key) navigation or not, default value is false
+                $SlideEasing: $JssorEasing$.$EaseOutQuint,          //[Optional] Specifies easing for right to left animation, default value is $JssorEasing$.$EaseOutQuad
+                $ : 800,                                //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
+                $MinDragOffsetToSlide: 20,                          //[Optional] Minimum drag offset to trigger slide , default value is 20
+                //$SlideWidth: 788,                                 //[Optional] Width of every slide in pixels, default value is width of 'slides' container
+                //$SlideHeight: 300,                                //[Optional] Height of every slide in pixels, default value is height of 'slides' container
+                $SlideSpacing: 0, 					                //[Optional] Space between each slide in pixels, default value is 0
+                $DisplayPieces: 1,                                  //[Optional] Number of pieces to display (the slideshow would be disabled if the value is set to greater than 1), the default value is 1
+                $ParkingPosition: 0,                                //[Optional] The offset position to park slide (this options applys only when slideshow disabled), default value is 0.
+                $UISearchMode: 1,                                   //[Optional] The way (0 parellel, 1 recursive, default value is 1) to search UI components (slides container, loading screen, navigator container, arrow navigator container, thumbnail navigator container etc).
+                $PlayOrientation: 1,                                //[Optional] Orientation to play slide (for auto play, navigation), 1 horizental, 2 vertical, 5 horizental reverse, 6 vertical reverse, default value is 1
+                $DragOrientation: drag,                                //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0)
+               
+$Delay: 800,  //Delay to assembly blocks
+                $BulletNavigatorOptions: {                          //[Optional] Options to specify and enable navigator or not
+                    $Class: $JssorBulletNavigator$,                 //[Required] Class to create navigator instance
+                    $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+                    $AutoCenter: 1,                                 //[Optional] Auto center navigator in parent container, 0 None, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+                    $Steps: 1,                                      //[Optional] Steps to go for each navigation request, default value is 1
+                    $Lanes: 1,                                      //[Optional] Specify lanes to arrange items, default value is 1
+                    $SpacingX: 8,                                   //[Optional] Horizontal space between each item in pixel, default value is 0
+                    $SpacingY: 8,                                   //[Optional] Vertical space between each item in pixel, default value is 0
+                    $Orientation: 1,                                //[Optional] The orientation of the navigator, 1 horizontal, 2 vertical, default value is 1
+                    $Scale: false                                   //Scales bullets navigator or not while slider scale
+                },
+
+                $ArrowNavigatorOptions: {                       //[Optional] Options to specify and enable arrow navigator or not
+                    $Class: $JssorArrowNavigator$,              //[Requried] Class to create arrow navigator instance
+                    $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+                    $AutoCenter: 2,                                 //[Optional] Auto center arrows in parent container, 0 No, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+                    $Steps: 1                                       //[Optional] Steps to go for each navigation request, default value is 1
+                }
+            };
+
+            var jssor_vege_slide = new $JssorSlider$(containerId, options);
+
+            /*//responsive code begin
+            //you can remove responsive code if you don't want the slider scales while window resizes
+            function ScaleSlider() {
+                var bodyWidth = document.body.clientWidth;
+                if (bodyWidth)
+                    jssor_vege_slide.$ScaleWidth(Math.min(620));
+                else
+                    $Jssor$.$Delay(ScaleSlider, 30);
+            }
+
+            ScaleSlider();
+            $Jssor$.$AddEvent(window, "load", ScaleSlider);
+
+            $Jssor$.$AddEvent(window, "resize", $Jssor$.$WindowResizeFilter(window, ScaleSlider));
+            $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
+            //responsive code end
+			*/
+        };
+    </script>
+    
+    <!-- Jssor Slider Begin -->
+    <!-- You can move inline styles to css file or css block. -->
+    <div id="main_banner_container" style="position: relative; top: 0px; left: 0px; width: 1200px;
+        height: 300px; overflow: hidden;">
+		<div class="left-mask" style="z-index:200;background:rgba(134, 134, 134, 0.3);width:24.8%;%;height:300px;position: absolute; top: 0px;left:0;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#4c67d670,endColorstr=#4c67d670);"></div>
+		<!--<div class="left-mask-bar" style="z-index:201;background:rgba(255,255,255,1);width:2px;height:300px;position: absolute; top: 0px;left: 24.8%;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#ffffff);"></div>-->
+        <!-- Slides Container -->
+        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1200px; height: 300px;
+            overflow: hidden;">
+		{insert name='ads' id=14} 	
+        </div>
+        <!-- Arrow Navigator Skin Begin -->
+
+        <!-- Arrow Left -->
+        <span u="arrowleft" class="jssora13l" style="width: 40px; height: 50px; top: 120px; left: 250px;">
+        </span>
+        <!-- Arrow Right -->
+        <span u="arrowright" class="jssora13r" style="width: 40px; height: 50px; top: 120px; right: 250px">
+        </span>
+        <!-- Arrow Navigator Skin End -->
+
+		<!--<div class="right-mask-bar" style="z-index:201;background:rgba(255,255,255,1);width:2px;height:300px;position: absolute; top: 0px;left: 75%;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff,endColorstr=#ffffff);"></div>-->
+			<div class="right-mask" style="z-index:200;background:rgba(134, 134, 134, 0.3);width:25%;height:300px;position: absolute;top: 0px;
+		left: 75.2%;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#4c67d670,endColorstr=#4c67d670);"></div>
+			</div>		
+        <!-- Trigger -->
+        <script>
+            jssor_main_banner_starter('main_banner_container');
+        </script>
+
+    </div>
+    <!-- Jssor Slider End -->
+
+<!--===================================================== 
+==================== end of slide show ================== 
+======================================================-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--===================================================== 
+=================== everyWeekSelection-panel ============ 
+======================================================-->
+<!--<div class="blank"></div>
+<div id="everyWeekSelection-panel" class="clearfix">
+
+<table border="0" cellspacing="0" cellpadding="0" style="width:90%;margin:0 auto;">
+  <tr>
+    <td>
+      <table border="0" cellspacing="0" cellpadding="0" style="width:100%;margin:0 auto;">
+        <tr>
+          <td style="text-align:center;">
+        {foreach name=nav_middle_list from=$navigator_list.middle  key=key item=nav}
+		{assign var="g" value=$key+2}
+        <a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if} {if $nav.active eq 1} class="cur"{/if}>
+          {$nav.name} 
+          {assign var=key_plus value=$smarty.foreach.nav_middle_list.iteration}
+          {assign var=na value=$navigator_list.middle.$key_plus}
+        </a>
+       {/foreach}
+       <font></font>
+       {foreach name=nav_middle_list from=$navigator_list.middle  key=key item=nav}
+        <a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if} {if $nav.active eq 1} class="cur"{/if}>
+          {$nav.name} 
+          {assign var=key_plus value=$smarty.foreach.nav_middle_list.iteration}
+          {assign var=na value=$navigator_list.middle.$key_plus}
+        </a>
+       {/foreach}
+          </td>
+        </tr>
+      </table>
+     </td>
+    </tr>
+  </table>
+</div>-->
+<!--============================================================
+================= end of everyWeekSelection-panel ============== 
+=============================================================-->
+
+
+
+
+
+<div class="blank"></div>
+{insert name='ads' id=15}
+<!-- {foreach name=cat_info_list from=$cat_info_list  key=key item=cat_info_list_item}-->
+
+
+<div class="blank"></div>
+<div id="section{$cat_info_list_item.sort_order}" class="clearfix cat-panel cd-section">
+<table border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+
+  <tr>
+    <td>
+      <table border="0" cellspacing="0" cellpadding="0" style="width:100%;margin:0 auto;height:310px;">
+        <tr>
+          <td id="top-left-img-id" style="width:19%;vertical-align:top;">
+			<!--====================================================================== Left Banner =======================================================================================-->
+<div id="left_banner_scroll_id_{$cat_info_list_item.cat_id}" style="position: relative; margin: 0 auto;top: 0px; left: 0px; width: 226px; height: 394px; overflow: hidden;">
+						<!-- Loading Screen -->
+						<div u="loading" style="position: absolute; top: 0px; left: 0px;">
+							<div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block;top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+							<div style="position: absolute; display: block; background: url(images/loading.gif) no-repeat center center;top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+						</div>
+						<!-- Slides Container -->
+						<div u="slides"  class="" style="cursor:  {if $cat_info_list_item.left_banner|@count gt 1}move{/if}; position: absolute; left: 0px; top: 0px; width: 226px;height: 394px; overflow: hidden;">
+	
+								{if $cat_info_list_item.left_banner|@count gt 1}							
+								<!-- {foreach name=left_banner from=$cat_info_list_item.left_banner  key=key item=item}-->{assign var = num value = $smarty.foreach.left_banner.iteration}
+								<!-- {if $item.url neq "" and $item.url neq "http://"}-->
+								<div style="width:100%;height:394px;">
+								<a style="width:100%;" href="{$item.url}" target="_blank">
+								  <img src="{$item.src}" width='' height='' />
+								</a>
+								</div>
+								<!-- {else}-->
+								<div><img src="{$item.src}" style="width:100%;"/></div>
+								<!-- {/if}-->
+								<!-- {/foreach} --> 
+								{else}
+								<div><img src="themes/warket/images/side_banner_default.jpg" style="width:100%;"/></div>
+								{/if}
+					
+		
+					  </div>
+					<!-- bullet navigator container -->
+					{if $num gt 1}	
+					<div u="navigator" class="Bullet" style="position: absolute; bottom: 2px; left: 6px;">
+						<!-- bullet navigator item prototype -->
+						<div u="prototype" style="POSITION: absolute; WIDTH: 19px; HEIGHT: 19px; text-align:center; line-height:19px; color:White; font-size:12px;"></div>
+					</div>
+					{/if}
+					<!-- Bullet Navigator Skin End -->
+			  
+					</div>
+		<!--====================================================================== End of Left Banner =======================================================================================-->
+          </td>
+          <td style="vertical-align:top;">
+            <table border="0" cellspacing="0" cellpadding="0" style="width:100%;margin:0 auto;">
+              <tr>
+                <td style="vertical-align:top;text-align:center;padding:0 2px;">
+				
+					<!--====================================================================== Top Banner =======================================================================================-->
+					<div id="top_banner_scroll_id_{$cat_info_list_item.cat_id}" style="position: relative; margin: 0 auto;top: 0px; left: 0px; width: 744px; height: 39px; overflow: hidden;">
+						<!-- Loading Screen -->
+						<div u="loading" style="position: absolute; top: 0px; left: 0px;">
+							<div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block;top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+							<div style="position: absolute; display: block; background: url(images/loading.gif) no-repeat center center;top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+						</div>
+						<!-- Slides Container -->
+						<div u="slides"  class="" style="cursor: {if $cat_info_list_item.top_banner|@count gt 1}move{/if}; position: absolute; left: 0px; top: 0px; width: 744px;height: 39px; overflow: hidden;">
+	
+								{if $cat_info_list_item.top_banner|@count gt 1}								
+								<!-- {foreach name=top_banner from=$cat_info_list_item.top_banner  key=key item=item}-->
+								<!-- {if $item.url neq "" and $item.url neq "http://"}-->
+								<div style="width:744px;height:39px;">
+								<a style="width:100%;" href="{$item.url}" target="_blank">
+								  <img src="{$item.src}" width=620 height=39 />
+								</a>
+								</div>
+								<!-- {else}-->
+								<div><img src="{$item.src}" style="width:100%;"/></div>
+								<!-- {/if}-->
+								<!-- {/foreach} --> 
+								{else}
+								<div><img src="themes/warket/images/side_banner_default.jpg" style="width:100%;"/></div>
+								{/if}
+		
+					     </div>
+					<!-- bullet navigator container -->
+					<div u="navigator" class="Bullet_invisble" style="position: absolute; bottom: 2px; left: 6px;">
+						<!-- bullet navigator item prototype -->
+						<div u="prototype" style="POSITION: absolute; WIDTH: 19px; HEIGHT: 19px; text-align:center; line-height:19px; color:White; font-size:12px;"></div>
+					</div>
+					<!-- Bullet Navigator Skin End -->
+			  
+					</div>
+					<!--====================================================================== End of Top Banner =======================================================================================-->
+	
+                </td>
+              </tr>
+              <tr style="height:4px;"><td></td></tr>
+              <tr>
+                <td id="vege-content-td" style="text-align:center;">
+                  <div id="vege-content-wrapper" style="padding:0px 2px;">
+
+
+
+    <!-- You can move inline styles to css file or css block. -->
+    <div id="category_grouped_page_scroll_id_{$cat_info_list_item.cat_id}" style="position: relative; margin: 0 auto;
+        top: 0px; left: 0px; width: 744px; height: 350px; overflow: hidden;">
+        <!-- Loading Screen -->
+        <div u="loading" style="position: absolute; top: 0px; left: 0px;">
+            <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block;
+                top: 0px; left: 0px; width: 100%; height: 100%;">
+            </div>
+            <div style="position: absolute; display: block; background: url(images/loading.gif) no-repeat center center;
+                top: 0px; left: 0px; width: 100%; height: 100%;">
+            </div>
+        </div>
+        <!-- Slides Container -->
+        <div  id="products" u="slides"  class="" style="position: absolute; left: 0px; top: 0px; width: 744px;
+            height: 350px; overflow: hidden;">
+           
+				{assign var = "page" value = 0}
+               <!-- {foreach name=paged_result from=$cat_info_list_item.paged_result  key=key item=gitem}-->{assign var = "page" value = $smarty.foreach.paged_result.iteration}
+			    <div>
+
+
+
+
+
+                          <table border="0" cellspacing="0" cellpadding="0" style="width:100%;border: 0px solid #E4E4E4;
+padding: 0px 4px;">
+							<tr>
+								<td style="width:100%;height: 173px;">
+									<ul>
+										<!-- {foreach name=paged_result_top from=$gitem.top  key=topkey item=topitem}-->
+										<li style="width: 182px;overflow: hidden;float:left; height:172px;border-top-color:transparent!important;border: 1px solid #ddd; border-left:0 none;{if $smarty.foreach.paged_result_top.iteration eq 4}border-right: 0 none;{/if}">
+											<div class="{if $topitem.id neq ""}product{else}empty_product{/if}">
+												<input class="product_id" type="hidden" value="{$topitem.id}">
+												<div style="height:173px;">
+													{if $topitem.id neq ""}
+													<a class="item" href="{$topitem.url}">
+														<img class="product_img" src="{$topitem.thumb}" style="border:0px solid #000;width:130px;height:130px;padding:0;margin: 0 auto;">
+													</a>
+													{else}{/if}
+												</div>
+												<div class="index_goods_text">
+												<a class="item" href="{$topitem.url}" title="{$topitem.name}">
+												{$topitem.short_name}
+												</a>
+												<span class="shop_price">
+												{$topitem.shop_price}
+												</span>
+												</div>												
+											</div>
+										</li>
+										<!-- {/foreach} -->
+										</ul>
+								</td>
+							</tr>
+							<tr>
+								<td style="width:100%;height: 173px;">
+									<ul>
+										<!-- {foreach name=paged_result_bottom from=$gitem.bottom  key=bottomkey item=bottompitem}-->
+										<li style="width: 182px;overflow: hidden;float:left; height:172px;border-bottom-color:transparent!important;border: 1px solid #ddd;	border-top:0 none; border-left:0 none;{if $smarty.foreach.paged_result_bottom.iteration eq 4}border-right: 0 none;{/if}">
+											<div class="{if $bottompitem.id neq ""}product{else}empty_product{/if}">
+												<input class="product_id" type="hidden" value="{$bottompitem.id}">
+												<div style="height:173px;">
+													{if $bottompitem.id neq ""}
+													<a class="item" href="{$bottompitem.url}">
+														<img class="product_img" src="{$bottompitem.thumb}" style="border:0px solid #000;width:130px;height:130px;padding:0;margin: 0 auto;">
+													</a>
+													{else}{/if}
+												</div>
+												<div class="index_goods_text">
+												<a class="item" href="{$bottompitem.url}" title="{$bottomitem.name}">
+												{$bottompitem.short_name}
+												</a>
+												<span class="shop_price">
+												{$bottompitem.shop_price}
+												</span>
+												</div>												
+											</div>
+										</li>
+										<!-- {/foreach} -->
+										</ul>
+								</td>
+							</tr>
+
+                        </table>
+
+
+
+ 
+				</div>
+                <!-- {/foreach} -->             
+           
+        </div>
+                
+       
+        <!-- bullet navigator container -->
+
+        <div u="navigator" class="jssorb21" style="position: absolute; bottom: 2px; left: 6px;">
+            <!-- bullet navigator item prototype -->
+            <div u="prototype" style="POSITION: absolute; WIDTH: 19px; HEIGHT: 19px; text-align:center; line-height:19px; color:White; font-size:12px;"></div>
+        </div>
+
+        <!-- Bullet Navigator Skin End -->
+
+        <!-- Arrow Navigator Skin Begin -->
+       	{if $page gt 1}
+        <!-- Arrow Left -->
+        <span u="arrowleft" class="jssora21l" style="width:10px;height:40px;border-radius:50%;padding:0px 2px;top: 123px; {if $vege_page eq 1}display:none;{/if}"><i class="fa fa-angle-left" style="background-color:#fff;margin-top:3px;color: #CCCCCC;font-size:2.5em;{if $vege_page eq 1}display:none;{/if}"></i>
+        </span>
+        <!-- Arrow Right -->
+        <span u="arrowright" class="jssora21r" style="width:10px;height:40px;border-radius:50%;padding:0px 2px;top: 123px; right: 0;{if $vege_page eq 1}display:none;{/if}"><i class="fa fa-angle-right" style="background-color:#fff;margin-top:3px;color: #CCCCCC;font-size:2.5em;{if $vege_page eq 1}display:none;{/if}"></i>
+        </span>
+        <!-- Arrow Navigator Skin End -->
+  		{/if}
+    </div>
+    <!-- Jssor Slider End -->
+
+<!-- end of scroll banner -->
+
+
+
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <td id="top-right-img-td" style="width:19%;vertical-align:top;">
+           <!--====================================================================== Right Banner =======================================================================================-->
+					<div id="right_banner_scroll_id_{$cat_info_list_item.cat_id}" style="position: relative; margin: 0 auto;top: 0px; left: 0px; width: 226px; height: 394px; overflow: hidden;">
+						<!-- Loading Screen -->
+						<div u="loading" style="position: absolute; top: 0px; left: 0px;">
+							<div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block;top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+							<div style="position: absolute; display: block; background: url(images/loading.gif) no-repeat center center;top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+						</div>
+						<!-- Slides Container -->
+						<div u="slides"  class="" style="cursor:  {if $cat_info_list_item.right_banner|@count gt 1}move{/if}; position: absolute; left: 0px; top: 0px; width: 226px;height: 394px; overflow: hidden;">
+	
+								{if $cat_info_list_item.right_banner|@count gt 1}							
+								<!-- {foreach name=right_banner from=$cat_info_list_item.right_banner  key=key item=item}-->{assign var = num value = $smarty.foreach.right_banner.iteration}
+								<!-- {if $item.url neq "" and $item.url neq "http://"}-->
+								<div style="width:100%;height:394px;">
+								<a style="width:100%;" href="{$item.url}" target="_blank">
+								  <img src="{$item.src}" width='' height='' />
+								</a>
+								</div>
+								<!-- {else}-->
+								<div><img src="{$item.src}" style="width:100%;"/></div>
+								<!-- {/if}-->
+								<!-- {/foreach} --> 
+								{else}
+								<div><img src="themes/warket/images/side_banner_default.jpg" style="width:100%;"/></div>
+								{/if}
+					
+		
+					     </div>
+					<!-- bullet navigator container -->
+					{if $num gt 1}	
+					<div u="navigator" class="Bullet" style="position: absolute; bottom: 2px; left: 6px;">
+						<!-- bullet navigator item prototype -->
+						<div u="prototype" style="POSITION: absolute; WIDTH: 19px; HEIGHT: 19px; text-align:center; line-height:19px; color:White; font-size:12px;"></div>
+					</div>
+					{/if}
+					<!-- Bullet Navigator Skin End -->
+			  
+					</div>
+					<!--======================================================================End of Right Banner =======================================================================================-->
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+ <tr height="3"><td colspan="3" ></td></tr>
+  <tr>
+      <td id="bottom-banner-id" colspan="3" style="text-align:center;">
+         <!--====================================================================== Bottom Banner =======================================================================================-->
+					<div id="bottom_banner_scroll_id_{$cat_info_list_item.cat_id}" style="position: relative; margin: 0 auto;top: 0px; left: 0px; width: 1200px; height: 50px; overflow: hidden;">
+						<!-- Loading Screen -->
+						<div u="loading" style="position: absolute; top: 0px; left: 0px;">
+							<div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block;top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+							<div style="position: absolute; display: block; background: url(images/loading.gif) no-repeat center center;top: 0px; left: 0px; width: 100%; height: 100%;"></div>
+						</div>
+						<!-- Slides Container -->
+						<div u="slides"  class="" style="cursor: {if $cat_info_list_item.bottom_banner|@count gt 1}move{/if}; position: absolute; left: 0px; top: 0px; width: 1200px;height: 50px; overflow: hidden;">
+	
+								{if $cat_info_list_item.bottom_banner|@count gt 1}
+								<!-- {foreach name=bottom_banner from=$cat_info_list_item.bottom_banner  key=key item=item}-->
+								<!-- {if $item.url neq "" and $item.url neq "http://"}-->
+								<div style="width:1200px;height:50px;">
+								<a style="width:100%;" href="{$item.url}" target="_blank">
+								  <img src="{$item.src}" width=1200 height=50 />
+								</a>
+								</div>
+								<!-- {else}-->
+								<div><img src="{$item.src}" style="width:100%;"/></div>
+								<!-- {/if}-->
+								<!-- {/foreach} --> 
+								{else}
+								<div><img src="themes/warket/images/bottom_banner_default.jpg" style="width:100%;"/></div>
+								{/if}
+		
+					     </div>
+					<!-- bullet navigator container -->
+					<div u="navigator" class="Bullet_invisble" style="position: absolute; bottom: 2px; left: 6px;">
+						<!-- bullet navigator item prototype -->
+						<div u="prototype" style="POSITION: absolute; WIDTH: 19px; HEIGHT: 19px; text-align:center; line-height:19px; color:White; font-size:12px;"></div>
+					</div>
+					<!-- Bullet Navigator Skin End -->
+			  
+					</div>
+					<!--======================================================================End of Bottom Banner =======================================================================================-->
+      </td>
+    </tr>
+  </table>
+</div>
+    <!-- Jssor Slider Begin -->
+    <!-- Trigger -->
+    <script>
+    {if $cat_info_list_item.paged_result|@count gt 1}slide_go('category_grouped_page_scroll_id_{$cat_info_list_item.cat_id}',false,0);{/if}
+    {if $cat_info_list_item.left_banner|@count gt 1}slide_go('left_banner_scroll_id_{$cat_info_list_item.cat_id}',false,0);{/if}
+    {if $cat_info_list_item.top_banner|@count gt 1}slide_go('top_banner_scroll_id_{$cat_info_list_item.cat_id}',false,0);{/if}
+    {if $cat_info_list_item.right_banner|@count gt 1}slide_go('right_banner_scroll_id_{$cat_info_list_item.cat_id}',false,0);{/if}
+    {if $cat_info_list_item.bottom_banner|@count gt 1}slide_go('bottom_banner_scroll_id_{$cat_info_list_item.cat_id}',true,1);{/if}
+    </script>
+
+
+<!-- {/foreach} --> 
+
+
+
+
+
+
+
+
+
+
+
+<div class="blank"></div>
+<!--<div id="re_men_outside_container" style="position: relative; width: 1200px;margin: 0 auto;overflow:hidden;">
+	
+	<table border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+		<tr>
+		<td style="width:68%;">
+	
+	<div style="width:100%;border:1px solid #E8E8E8;" >
+	<table border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+		<tr>
+		<td style="width:100%;text-align:left;">
+		<div style="margin-left:0px;font-family:Microsoft YaHei;font-size:1.2em;background:#f4f4f4;font-weight:700;cursor:default;">
+			<table border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+			<tr>	
+			<td>
+				<font style="padding:1px 3px;"></font>
+			</td>
+			<td>	
+				<font style="padding:1px 3px;"></font>
+			</td>
+			</tr>
+			</table>
+		</div>
+		</td>
+		</tr>
+		
+		<tr>
+			<td style="width:100%;padding:4px;">
+	
+          <div id="slider1_container" style="position: relative; top: 8px; left: 0px; width: 650px;height: 140px;">
+            <!-- Slides Container -->
+            <div u="slides" style="position: absolute; left: 0px; top: 0px; width: 650px; height: 140px;overflow: hidden;">
+                        <!-- {foreach from=$re_men_shai_dan_banner_db  key=key item=item}-->
+            <div>
+			
+			<table border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+			<tr>
+			
+			
+			
+			
+			<td style="width:;font-family:Microsoft YaHei;font-size:1.1em;">
+			
+			
+			
+              <table style="width:100%">
+                <tr>
+                  <td style="width:20%;">
+                    <a href="{$item.url}"><img src="{$item.src}" width="50" height="50" style="width:100%;"></a>
+                  </td>
+                  <td style="vertical-align:top;">
+                    <table style="width:100%">
+                      <tr>
+                        <td>
+                          <a href="{$item.url}" class="re_men_title">{$item.title}</a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <a href="{$item.url}" class="re_men_desc">{$item.text}</a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			      </td>
+				  
+				  
+				  
+				  	<td style="width:50%;font-family:Microsoft YaHei;font-size:1.1em;">
+			{if $re_men_huo_dong_banner_db.$key}
+			{assign var=huo_dong value=$re_men_huo_dong_banner_db.$key}
+              <table style="width:100%">
+                <tr>
+                  <td style="width:20%;">
+                    <a href="{$huo_dong.url}"><img src="{$huo_dong.src}" width="50" height="50" style="width:100%;"></a>
+                  </td>
+                  <td style="vertical-align:top;">
+                    <table style="width:100%">
+                      <tr>
+                        <td>
+                          <a href="{$huo_dong.url}" class="re_men_title">{$huo_dong.title}</a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <a href="{$huo_dong.url}" class="re_men_desc">{$huo_dong.text}</a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+			{else}
+			    <table style="width:100%">
+                <tr>
+                  <td style="width:20%;">
+                   
+                  </td>
+                  <td style="vertical-align:top;">
+                    <table>
+                      <tr>
+                        <td>
+                          
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+			{/if}
+			  
+			  
+			  
+			  
+			  
+			  
+			  
+			      </td>
+				  
+				  
+				  
+				  
+				  
+				  
+                </tr>
+              </table>
+			  
+			  
+            </div>
+           <!-- {/foreach}-->
+            </div>
+         </div>
+		 
+				</td>
+				<td>
+				
+				
+				
+				</td>
+			</tr>
+		</table>
+		<table border="0" cellpadding="0" cellspacing="0"><tr height="3"><td></td></tr></table>
+	</div>  
+		 
+		 
+	</td>
+	<td width="7">
+	</td>
+	<td style="height:164px;">
+	
+	
+	<table border="0" cellspacing="0" cellpadding="0" style="width:100%;height:100%;">
+	<tr>
+	
+	<td>
+	
+	
+	<table border="0" cellspacing="0" cellpadding="0" style="width:100%;height:100%;">
+	<tr>
+	<td style="background-color:#FF9D9D;height:18px;">
+	
+	</td>
+	</tr>
+	<tr>
+	<td>
+	<div class="mar"  style="height:100%; padding:1px;border:1px solid #E8E8E8;">
+	<marquee behavior="scroll" direction="up" scrollamount="1" style="height:100%;" onmouseover="this.stop();" onmouseout="this.start();" scrolldelay="2">
+	
+	<table border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+	<!-- {foreach from=$faq_comments  key=key item=item}-->
+				<tr>
+				<td>
+				<a href="#" class="marquee_a">{$item.content}</a>
+				</td>
+				</tr>
+				<tr height="7"><td></td></tr>
+	<!-- {/foreach}-->	
+	</table>
+	</marquee>
+	
+	</div>
+	</td>
+	</tr>
+	</table>
+	
+	
+	</td>
+
+	</tr>
+	</table>
+	
+	
+	</td>
+	</tr>
+	</table>	 
+
+</div>     -->    
+<script>
+      /* $(document).ready(function () {
+           $('div.mar marquee').marquee('pointer').mouseover(function () {
+			  $(this).trigger('stop');
+			}).mouseout(function () {
+			  $(this).trigger('start');
+			})        
+	});*/
+		 
+</script>
+
+<!-- end-->
+<div class="blank"></div>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+<!-- slide js -->
+
+<script>
+         /*$(document).ready(function () {
+            var options = {
+                $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
+                $PlayOrientation: 6,                                //[Optional] Orientation to play slide (for auto play, navigation), 1 horizental, 2 vertical, 5 horizental reverse, 6 vertical reverse, default value is 1
+                $DragOrientation: 0,                                //[Optional] Orientation to drag slide, 0 no drag, 1 horizental, 2 vertical, 3 either, default value is 1 (Note that the $DragOrientation should be the same as $PlayOrientation when $DisplayPieces is greater than 1, or parking position is not 0)
+				//$SlideWidth: 600,                                 //[Optional] Width of every slide in pixels, default value is width of 'slides' container
+                $SlideHeight: 70,                                //[Optional] Height of every slide in pixels, default value is height of 'slides' container
+                $ArrowNavigatorOptions: {
+                    $Class: $JssorArrowNavigator$,              //[Requried] Class to create arrow navigator instance
+                    $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
+                    $AutoCenter: 1,                                 //[Optional] Auto center arrows in parent container, 0 No, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
+                    $Steps: 1                                       //[Optional] Steps to go for each navigation request, default value is 1
+                }
+            };
+
+            var jssor_slider1 = new $JssorSlider$("slider1_container", options);
+        });*/
+		 
+</script>
+			<!--<div>
+				<div id="followbox"></div>
+				<div id="cart">
+					<h2>Your Shopping Cart</h2>
+					<p>As you browse through the product listing, you can add your items to the shopping cart by dragging them into the box below.</p>
+					<div class="dropzone"><p>Drag items here to add them to your cart.</p></div>
+					<div class="cart-content">
+						<ol>
+							<li class="placeholder">You have no items in your cart.</li>
+						</ol>
+					</div>
+					<div class="empty">Remove all items from cart.</div>
+				</div>
+			</div>
+			<div id="dialog-confirm" title="Empty Cart">Are you sure you want to empty the contents of your shopping cart.</div>-->	
+			
+			
+			
+			
+
+
+			
+<script>
+//var product_id = 47;
+</script>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+ {insert_scripts files='jquery-ui-1.8.11.custom.min.js,cartfollow.js,script.js,cart.js'}
+<!-- end of slide js -->
+</body>
+</html>

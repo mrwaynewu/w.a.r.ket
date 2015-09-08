@@ -1,0 +1,460 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+
+<!--用户评论 START-->    
+
+
+
+<div class="user_comments">
+    	<ul id="commentTab" class="switch-nav-green switch-nav-green-tabs">
+			<li class="{$tab_active_class_normal}"><a href="#comment1" data-toggle="tab" onclick="all_comments();return false;">{$lang.user_comment} ({$lang.total}<font class="f1">{$pager.all_comments_record_count}</font>{$lang.user_comment_num})</a></li>
+			<li class="{$tab_active_class_good}"><a href="#comment2" data-toggle="tab" onclick="good_rank();return false;">好评 (<font class="f1">{$pager.good_rank_record_count}</font>)</a></li>
+			<li class="{$tab_active_class_medium}"><a href="#comment3" data-toggle="tab" onclick="medium_rank();return false;">中评 (<font class="f1">{$pager.medium_rank_record_count}</font>)</a></li>
+			<li class="{$tab_active_class_bad}"><a href="#comment4" data-toggle="tab" onclick="bad_rank();return false;">差评 (<font class="f1">{$pager.bad_rank_record_count}</font>)</a></li>
+			<!--<li class="{$tab_active_class_show_img}"><a href="#comment3" data-toggle="tab" onclick="show_img();return false;">晒单 (<font class="f1">{$pager.show_img_record_count}</font>)</a></li>-->
+		</ul>
+<div id="commentTabContent" class="tab-content">
+				<input value="{$active_tab_value}" id="active_tab" type="hidden"/>
+<div class="tab-pane active comment-pane" id="comment1">
+<input id="comment_tab_normal" type="hidden" value="{$comment_tab_normal}">
+	<ul>
+	 <!-- {if $comments} -->
+       <!-- {foreach from=$comments item=comment name=coms} -->
+    	<li> 
+    		<div class="cmt_wrap" style="">
+    		<div style="padding:1%;">
+		
+			<table border="0" cellspacing="0" class="{if $comment.top eq 1}top_liked_comment{/if}" cellpadding="0" style="width:100%;background-color:#fff;">
+			<tr>
+			<td>
+			
+               <table border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+				<tr>
+				<td>
+                <span class="cmt_rate"><img src="images/stars_{$comment.rank}.png" width="100"/></span><span class="cmt_time">( {$comment.add_time} )</span>
+				</td>
+				<td style="text-align:right;">
+				{if $comment.allow_reply eq 1}
+					<span class="re_span" onclick="re_span(event,{$comment.id},{$comment.user_id});">追加</span>
+				{/if}
+				<span><!-- {if $comment.username} -->{$comment.username|escape:html}<!-- {else} -->{$lang.anonymous}<!-- {/if} -->&nbsp;</span>
+                <i id="like_icon_{$comment.id}" class="{if $comment.is_user_liked eq 0}  fa fa-thumbs-o-up {else} fa fa-thumbs-up {/if}" onclick="commentLike({$comment.id},{$smarty.session.user_id});"></i>&nbsp;<font id="like_container_{$comment.id}">({$comment.like})</font>
+				<input type="hidden" id="liked_{$comment.id}" value="{if $comment.is_user_liked eq 0} 0 {else} 1 {/if}">
+				</td>
+				</tr>
+				</table>	
+					
+			</td>
+			</tr>
+			<tr height="10"><td></td></tr>
+			<tr>
+			<td>
+				<table border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+				<tr>
+				<td style="{if $comment.img|@count gt 0}{else}{/if}">
+				<table border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+				<tr>
+				<td>
+				
+                 <p id="comment_content_p_{$comment.id}">{$comment.content}</p>
+				 
+				</td>
+				</tr>
+				<!-- {if $comment.img|@count gt 0} -->
+				<tr height="20"><td></td></tr>
+				<tr>
+				<td>
+				<!-- {foreach name=imgs from=$comment.img item=img} -->
+				<div style="float:left;margin-right:5px;padding:1px;border:1px solid #dddddd;" id="div_{$smarty.foreach.coms.iteration}_{$smarty.foreach.imgs.iteration}">
+				<table border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+				<tr>
+				<td>
+				<img src="{$img.comment_img_thumb_url}" width="40" id="thumb_{$smarty.foreach.coms.iteration}_{$smarty.foreach.imgs.iteration}" style="cursor: -webkit-zoom-in; cursor: -moz-zoom-in;" onclick="img_click({$smarty.foreach.coms.iteration},{$smarty.foreach.imgs.iteration},document.getElementById('src_{$smarty.foreach.coms.iteration}_{$smarty.foreach.imgs.iteration}').value,{$smarty.foreach.imgs.total});"/>
+				</td>
+				</tr>
+				<tr>
+				<td  style="display:none;">	
+				<input value="{$img.comment_img_url}" id="src_{$smarty.foreach.coms.iteration}_{$smarty.foreach.imgs.iteration}" type="hidden"/>
+				</td>
+				</tr>
+				</table>
+				</div>
+				<!-- {/foreach} -->
+				</td>				
+				<!-- {/if} -->
+				</tr>
+				<tr>
+				<td>
+				<img src="" width="200" id="ori_{$smarty.foreach.coms.iteration}" style="display:none;"/>
+				</td>
+				</tr>
+
+				<!-- {if $comment.children|@count gt 0} -->
+
+				
+				<!-- {foreach from=$comment.children item=child} -->
+				<tr>
+				<td style="padding-top:10px;">
+				<span><font style="color:#A6A6A6;"> {$child.add_time}</span>	
+				</td>
+				</tr>
+				<tr>
+				<td>
+				<p style="{if $child.is_admin eq 1}color:#EF5A2C;{/if}">{if $child.is_admin eq 1}<font style="color:#EF5A2C;">微市助手：</font> {else}<font style="color:#A6A6A6;"> 用户追评：</font>{/if}{$child.content}</p>		
+				</td>
+				</tr>
+				<!-- {/foreach} -->
+				<!-- {/if} -->
+				</table>
+				</td>
+				</tr>
+				</table>	
+					
+			</td>
+			</tr>
+			</table>
+
+            </div>
+            </div>
+    	</li>
+		<!-- {/foreach} -->
+        <!--{else}-->
+        <li style="text-align:center;padding:1%;">{$lang.no_comments}</li>
+        <!--{/if}-->
+    </ul>
+
+</div>
+<div class="tab-pane" id="comment2">
+<input id="comment_tab_good" type="hidden" value="{$comment_tab_good}">
+</div>
+<div class="tab-pane" id="comment3">
+<input id="comment_tab_medium" type="hidden" value="{$comment_tab_medium}">
+</div>
+<div class="tab-pane" id="comment4">
+<input id="comment_tab_bad" type="hidden" value="{$comment_tab_bad}">
+</div>
+
+
+</div>
+        
+</div>
+	
+	
+	
+     <div class="box">
+     <div>
+      
+	  
+
+ 
+       <!--翻页 start-->
+
+<div style="float:right;">	  
+<ul id="comment-record-pagination" class="pagination-sm pagination">
+{foreach from=$comment_record_pagination key=key item=item}
+  <li class="{if $key eq 1}active{/if}"><a href="{$key}">{$key}</a></li>
+{/foreach} 
+</ul>	  
+</div>	 
+{$comment_record_pagination_js}	
+		
+		<!--{if $smarty.session.user_id eq ""}--><!--利用smarty模板获取session中的用户ID，如果存在即为已登录，否则为未登录-->
+		{assign var="login" value="0"}
+		<!--{else}-->
+		{assign var="login" value="1"}
+		<!--{/if}-->
+		
+        <script type="Text/Javascript" language="JavaScript">
+        <!--
+        {literal}
+        function selectPage(sel)
+        {
+          sel.form.submit();
+        }
+        {/literal}
+        //-->
+		
+		
+		
+		
+		
+		
+		function all_comments(){
+		frm = document.getElementById('commentForm');
+		  var cmt = new Object;
+		  cmt.content         = frm.elements['content'].value;
+		  cmt.type            = frm.elements['cmt_type'].value;
+		  cmt.id              = frm.elements['id'].value;
+		  cmt.enabled_captcha = frm.elements['enabled_captcha'] ? frm.elements['enabled_captcha'].value : '0';
+		  cmt.captcha         = frm.elements['captcha'] ? frm.elements['captcha'].value : '';
+		  //cmt.rank            = frm.elements['comment_rank'].value;
+		  cmt.parent_id       = frm.elements['comment_parent_id'].value;
+		
+		
+		
+		
+
+		
+		
+		
+		//Ajax.call('comment.php', 'cmt=' + JSON.stringify(cmt), commentResponse, 'POST', 'JSON');
+		Ajax.call('comment.php', 'act=tab&active_tab=all_comments&comment_tab_normal=1&cmt=' + JSON.stringify(cmt), goodRankResponse, 'POST', 'JSON');
+		}
+		
+		
+		
+		function good_rank(){
+		frm = document.getElementById('commentForm');
+		  var cmt = new Object;
+		  cmt.content         = frm.elements['content'].value;
+		  cmt.type            = frm.elements['cmt_type'].value;
+		  cmt.id              = frm.elements['id'].value;
+		  cmt.enabled_captcha = frm.elements['enabled_captcha'] ? frm.elements['enabled_captcha'].value : '0';
+		  cmt.captcha         = frm.elements['captcha'] ? frm.elements['captcha'].value : '';
+		  //cmt.rank            = frm.elements['comment_rank'].value;
+		  cmt.parent_id       = frm.elements['comment_parent_id'].value;
+		
+		
+		
+		
+
+		
+		
+		
+		//Ajax.call('comment.php', 'cmt=' + JSON.stringify(cmt), commentResponse, 'POST', 'JSON');
+		Ajax.call('comment.php', 'act=tab&active_tab=good_rank&comment_tab_good=1&cmt=' + JSON.stringify(cmt), goodRankResponse, 'POST', 'JSON');
+		}
+		
+		function medium_rank(){
+		frm = document.getElementById('commentForm');
+		  var cmt = new Object;
+		  cmt.content         = frm.elements['content'].value;
+		  cmt.type            = frm.elements['cmt_type'].value;
+		  cmt.id              = frm.elements['id'].value;
+		  cmt.enabled_captcha = frm.elements['enabled_captcha'] ? frm.elements['enabled_captcha'].value : '0';
+		  cmt.captcha         = frm.elements['captcha'] ? frm.elements['captcha'].value : '';
+		  //cmt.rank            = frm.elements['comment_rank'].value;
+		  cmt.parent_id       = frm.elements['comment_parent_id'].value;
+		
+		
+		Ajax.call('comment.php', 'act=tab&active_tab=medium_rank&comment_tab_medium=1&cmt=' + JSON.stringify(cmt), goodRankResponse, 'POST', 'JSON');
+		}
+		function bad_rank(){
+		frm = document.getElementById('commentForm');
+		  var cmt = new Object;
+		  cmt.content         = frm.elements['content'].value;
+		  cmt.type            = frm.elements['cmt_type'].value;
+		  cmt.id              = frm.elements['id'].value;
+		  cmt.enabled_captcha = frm.elements['enabled_captcha'] ? frm.elements['enabled_captcha'].value : '0';
+		  cmt.captcha         = frm.elements['captcha'] ? frm.elements['captcha'].value : '';
+		  //cmt.rank            = frm.elements['comment_rank'].value;
+		  cmt.parent_id       = frm.elements['comment_parent_id'].value;
+		
+		
+		Ajax.call('comment.php', 'act=tab&active_tab=bad_rank&comment_tab_bad=1&cmt=' + JSON.stringify(cmt), goodRankResponse, 'POST', 'JSON');
+		}		
+		
+		
+		function show_img(){
+		frm = document.getElementById('commentForm');
+		  var cmt = new Object;
+		  cmt.content         = frm.elements['content'].value;
+		  cmt.type            = frm.elements['cmt_type'].value;
+		  cmt.id              = frm.elements['id'].value;
+		  cmt.enabled_captcha = frm.elements['enabled_captcha'] ? frm.elements['enabled_captcha'].value : '0';
+		  cmt.captcha         = frm.elements['captcha'] ? frm.elements['captcha'].value : '';
+		  //cmt.rank            = frm.elements['comment_rank'].value;
+		  cmt.parent_id       = frm.elements['comment_parent_id'].value;
+		
+		
+		
+		
+
+		
+		
+		
+		//Ajax.call('comment.php', 'cmt=' + JSON.stringify(cmt), commentResponse, 'POST', 'JSON');
+		Ajax.call('comment.php', 'act=tab&active_tab=show_img&cmt=' + JSON.stringify(cmt), goodRankResponse, 'POST', 'JSON');
+		}
+		
+		
+		
+		
+		
+		
+		function goodRankResponse(result){
+		
+		  var layer = document.getElementById('ECS_COMMENT');
+		  
+		
+			
+		  if (layer)
+		  {
+			layer.innerHTML = result.content;
+
+			$('#comment-record-pagination').twbsPagination({
+				startPage: result.page,
+				totalPages: result.totalPages,
+				visiblePages: 7,
+				onPageClick: function(event, page) {
+				//$('#page-content').text('Page ' + page);
+				javascript: gotoPage(page, goods_id);
+				}
+			});	
+		
+		  }    
+	  
+		}		
+		
+		
+		
+		
+		
+		function commentLike(commentId,userId){
+			if (userId != 0) {
+				if (document.getElementById('liked_' + commentId).value == 1) {
+
+					Ajax.call('comment.php', 'act=dislike&comment_id=' + JSON.stringify(commentId) + '&user_id=' + JSON.stringify(userId), commentDislikeResponse, 'POST', 'JSON');
+
+					return true;
+				} else {
+
+
+					Ajax.call('comment.php', 'act=like&comment_id=' + JSON.stringify(commentId) + '&user_id=' + JSON.stringify(userId), commentLikeResponse, 'POST', 'JSON');
+
+					return true;
+				}
+			} else {
+				alert("请登录后再点赞");
+			}
+		}
+		function commentLikeResponse(result){
+			if (result.error == 1){alert('不能给自己点赞');}
+			else if (result.error == 2){alert('您不可以重复点赞');}
+			else if (result.error == 0 && result.result === true){
+				if (result.is_liked === false){
+					document.getElementById('like_icon_'+ result.comment_id).className = 'fa fa-thumbs-up';
+					document.getElementById('liked_'+ result.comment_id).value = 1;	
+				}
+				document.getElementById('like_container_'+result.comment_id).innerHTML = '(' + result.count + ')';
+			}
+			return true;
+		}
+		
+		function commentDislikeResponse(result){
+			if (result.error == 1){alert('不能给自己点赞');}
+			else if (result.error == 2){alert('您不可以重复点赞');}
+			else if (result.error == 0 && result.result === true){
+				if (result.is_liked === true){
+					document.getElementById('like_icon_'+ result.comment_id).className = 'fa fa-thumbs-o-up';
+					document.getElementById('liked_'+ result.comment_id).value = 0;					
+				}
+				document.getElementById('like_container_'+result.comment_id).innerHTML = '(' + result.count + ')';
+			}
+			return true;
+		}
+		
+		
+		
+		
+		
+		
+		function recomment(commentId,userId){
+		
+		
+		document.getElementById('comment_parent_id').value = commentId;
+		document.getElementById('comment_outer_div').className = document.getElementById('comment_outer_div').className.replace("element-invisible", "");
+		
+		}
+		
+        </script>
+		
+		
+		<script>
+		
+		function img_click(outerIndex,innerIndex,url,total){	
+	
+			/*outerIndex = param.data.outerIndex;
+			innerIndex = param.data.innerIndex;
+			url = param.data.url;
+			total = param.data.total;*/
+			
+	
+	
+			
+					
+					
+					var n = total;
+					for(var i = 1; i < n + 1; i++){
+						if (i != innerIndex){
+							$( "#div_"  + outerIndex + '_' + i).removeClass( "img_focus" );
+							document.getElementById('thumb_' + outerIndex + '_' + i).style.cursor = 'zoom-in';
+						}
+						
+					}
+					var cursor1    = $('#thumb_' + outerIndex + '_' +innerIndex).css('cursor');
+					if (cursor1 == 'zoom-in'){
+						document.getElementById('thumb_' + outerIndex + '_' +innerIndex).style.cursor = 'zoom-out';
+					}
+					else{
+						document.getElementById('thumb_' + outerIndex + '_' +innerIndex + '').style.cursor = 'zoom-in';
+					}
+					if ($( "#div_"  + outerIndex + '_' + innerIndex).hasClass( "img_focus" )){
+						$( "#div_"  + outerIndex + '_' + innerIndex).removeClass( "img_focus" );
+					}
+					else{
+						$( "#div_"  + outerIndex + '_' + innerIndex).addClass( "img_focus" );
+					}
+							
+					id = "ori_" + outerIndex;
+
+					if (document.getElementById(id).style.display != 'none' && url != $('#ori_' + outerIndex).attr('src')){
+						$('#ori_' + outerIndex).attr('src',url);
+					}
+					else {
+						$('#ori_' + outerIndex).attr('src',url);
+						$("#"+id).slideFadeToggle();
+					}
+
+
+	
+	}
+			function re_span(event,commentId,userId){
+			
+			document.getElementById('comment_parent_id').value = commentId;
+			document.getElementById('comment_outer_div').className = document.getElementById('comment_outer_div').className.replace("element-invisible", "");
+			var re_content = document.getElementById('comment_content_p_' + commentId).innerHTML;
+			document.getElementById('submit_comment_title').innerHTML = '追加回复：' + re_content;
+			//document.getElementById('submit_comment_font').innerHTML = re_content;
+			
+				$('#show_img_form').css('display','none');
+				$('.first_row').css('display','none');
+				var target = $('#comment_outer_div');
+
+				if( target.length ) {
+					event.preventDefault();
+					$('html, body').animate({
+						scrollTop: target.offset().top
+					}, 500);
+				}
+			}
+		
+		$(document).ready(function () {
+		//$('.re_span').on('click', re_span(event));
+
+		
+	
+	
+	$.fn.slideFadeToggle  = function(speed, easing, callback) {
+        return this.animate({opacity: 'toggle', height: 'toggle'}, speed, easing, callback);
+	}; 
+
+	
+	
+	
+	});
+	</script>
+      </div>
+      </div>
+      <!--翻页 END-->
+

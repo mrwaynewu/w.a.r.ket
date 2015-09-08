@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<meta name="Description" content="{$description}" />
+{if $auto_redirect}
+<meta http-equiv="refresh" content="3;URL={$message.href}" />
+{/if}
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<style type="text/css">
+.fl{float: left;}
+.fr{float: right;}
+</style>
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<!--当前位置 start-->
+<div class="block box">
+ <div id="ur_here">
+  <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+ </div>
+</div>
+<!--当前位置 end-->
+<div class="blank"></div>
+<div class="block" style="width:100%;">
+   <div class="s_brand">
+  <div class="brand_box">
+        <div class="brand_top_s clearfix">
+                <h1 class="fl" style="float:left;">BRAND INDEX 品牌库</h1>
+                <!--<h2 class="fr">
+                    <span class="s_b fl">搜索品牌</span>
+                    <input type="text" class="b_t fl" />
+                    <span class="s_t fl"><img src="images/brandimg/brand_s.gif" width="25" height="24" /></span>
+                </h2>-->
+                <ul class="fr" style="float:right;">
+                    <li class="big_act" name="bigPic" action="view" disabled="disabled">
+                        <em class="big_c fl"></em>
+                        <strong>大图预览</strong>
+                    </li>
+                    <li name="smallPic" action="view" class="">
+                        <em class="list_c fl"></em>
+                        <strong>列表预览</strong>
+                    </li>
+                </ul>
+      </div>
+      <!--<div class="brand_top_l" style="padding-bottom:0;">
+                <p class="clearfix">
+                <a class="all b_act" href="#">全部</a><a href="#" class="a_l">包袋</a><a href="#" class="a_l">腕表</a><a href="#" class="a_l">腕表</a><a href="#" class="a_l">腕表</a><a href="#" class="a_l">腕表</a>
+                </p>
+            </div>-->
+        <div class="fixed_show_hide" style="display: none;"></div>
+        <div class="brand_fixed" style="">
+            <div class="brand_top_l">
+                <p class="clearfix">
+                <a class="all" href="#top">全部</a>
+				  {foreach from=$brand_list_all item = witem key=key}
+                  <a name="brandKey" href="javascript:void(0)" onclick="doAnchor('{$key}');">{$key}</a>
+				  {/foreach}
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    <!-- 图片预览 -->
+	<div class="list_content" style="display: block;">
+        
+			 {foreach from=$brand_list_all item = witem key=key name=bb}
+              <div class="s_b_c {if $smarty.foreach.bb.iteration % 2 eq '0'}  s_b_f{/if}">
+              <div class="list_t" id="bigPic{$key}">{$key}</div>
+              <div class="b_list" style="width: 1210px;">
+                  <ul class="clearfix">
+				    {foreach from=$witem item=bitem}
+                    <li>
+                                <a href="{$bitem.url}" rel="nofollow" target="_blank" class="lazy_bg" title="{$bitem.brand_name}"><img src="{$bitem.brand_logo}" width="180" height="240"></a>
+                                <p><a href="{$bitem.url}" target="_blank" title="{$bitem.brand_name}">{$bitem.brand_name}</a></p>
+                                <span style="display: none;">
+                                  <a href="{$bitem.url}" rel="nofollow" target="_blank" title="{$bitem.brand_name}"><img src="{$bitem.brand_logo}" width="180" height="240"></a>
+                                </span>                   
+                     </li>
+					 {/foreach}
+				  </ul>
+                </div>
+              </div>  
+			 {/foreach}
+    </div>
+    <!-- 文字预览 -->
+    <div class="list_content" style="display: none;">
+      <div class="list_overflow">
+          <div class="list_t_con clearfix">
+            {foreach from=$brand_list_all item = witem key=key name=bb}
+			<div class="fl list01">
+                      <dl class="list_dl">
+                            <dt><div id="smallPic{$key}">{$key}</div></dt>
+                            {foreach from=$witem item=bitem}
+							<dd><a href="{$bitem.url}" target="_blank" title="{$bitem.brand_name}">{$bitem.brand_name}</a></dd>
+							{/foreach}
+                      </dl>
+            </div>
+			{/foreach}
+          </div>
+        </div>
+    </div>
+</div>
+  
+</div>
+<div class="blank5"></div>
+<!--帮助-->
+<div class="block">
+  <div class="box">
+   <div class="helpTitBg clearfix">
+    <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+   </div>
+  </div>  
+</div>
+<div class="blank"></div>
+<!--帮助-->
+<!--友情链接 start-->
+<!--{if $img_links  or $txt_links }-->
+<div id="bottomNav" class="box">
+ <div class="box_1">
+  <div class="links clearfix">
+    <!--开始图片类型的友情链接{foreach from=$img_links item=link}-->
+    <a href="{$link.url}" target="_blank" title="{$link.name}"><img src="{$link.logo}" alt="{$link.name}" border="0" /></a>
+    <!--结束图片类型的友情链接{/foreach}-->
+    <!-- {if $txt_links} -->
+    <!--开始文字类型的友情链接{foreach from=$txt_links item=link}-->
+    [<a href="{$link.url}" target="_blank" title="{$link.name}">{$link.name}</a>] 
+    <!--结束文字类型的友情链接{/foreach}-->
+    <!-- {/if} -->
+  </div>
+ </div>
+</div>
+<!--{/if}-->
+<!--友情链接 end-->
+<div class="footer">
+  <div class="footerBody">
+    <Div class="block"> 
+      
+      <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem --> 
+      
+      </Div>
+  </div>
+</div>
+<script>
+$(function(){
+  //判断IE6
+  var isIE6 = false;
+  if(window.navigator.userAgent.indexOf("MSIE 6") != -1){
+    isIE6 = true;
+  }
+  
+  //隔行变色
+  $(".s_b_c:odd").addClass("s_b_f");
+  
+  //大图和列表查看
+  function setTab(oLis,oDivs,sclass){ 
+    for(var i=0; i<oLis.length; i++){
+      oLis[i].index=i;
+      oLis[i].onclick = function(){
+        for(var i=0; i<oLis.length; i++){
+          oLis[i].className = "";
+          oDivs[i].style.display = "none";
+        }
+        this.className = sclass;
+        oDivs[this.index].style.display = "block";
+      };
+    }
+  };
+  var oBlTab = $(".brand_top_s li");
+  var oDivshowhide = $(".list_content");
+  setTab(oBlTab,oDivshowhide,"big_act");
+  
+  //大图鼠标经过
+  $(".b_list li").hover(function(){
+    $(this).find("span").stop(true,true).fadeIn();
+  },function(){
+    $(this).find("span").stop(true,true).fadeOut();
+  })
+  
+  
+  
+  //吸顶条
+  var oTop = $("#header_csz").height() + $(".brand_top_s").outerHeight();
+  window.onscroll = function(){
+    var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+    if(scrollTop > oTop){
+      if(isIE6){
+        $(".brand_fixed").css("position","absolute");
+        $(".brand_fixed").css("top",scrollTop-156);
+        $(".fixed_show_hide").css("display","block");
+      }else{
+        $(".brand_fixed").css("position","fixed");
+        $(".fixed_show_hide").css("display","block");
+      }
+    }
+    else{
+      $(".brand_fixed").css("position","");
+      $(".fixed_show_hide").css("display","none");
+    }   
+  };
+
+  //分类鼠标效果
+  $(".brand_top_l p a").hover(function(){
+    $(this).addClass("b_hover");
+  },function(){
+    $(this).removeClass("b_hover");
+  });
+  
+  $(".brand_top_l p a").click(function(){
+    $(".brand_top_l p a").removeClass("b_act");
+    $(this).addClass("b_act");
+  });
+  $('[name="bigPic"],[name="smallPic"]').bind('click', function(){
+    if($(this).attr('disabled')){return;}
+    $('[action="view"]').removeAttr('disabled');
+    $(this).attr('disabled', 'true');
+    isTrue($(this).attr('name'));
+  });
+  $('[action="view"].big_act').attr('disabled', 'true');
+});
+</script>
+<script>
+
+//锚点
+function doAnchor(str){
+  var temp = $('[action="view"].big_act').attr('name')+str;
+  $("html,body").animate({scrollTop:$("#"+temp+"").offset().top-47}); 
+  $('dt.c_act').removeClass('c_act');$("#"+temp+"").closest('dt').addClass('c_act');
+  $("#isLetter").val(str);
+}
+
+function isTrue(val){
+  if($('[name="brandKey"].b_act').html()){
+    var temp=val+$('[name="brandKey"].b_act').html();
+    $('dt.c_act').removeClass('c_act');$("#"+temp+"").closest('dt').addClass('c_act');
+    $("html,body").animate({scrollTop:$("#"+temp+"").offset().top-47});
+  }
+}
+</script>
+</body>
+</html>
